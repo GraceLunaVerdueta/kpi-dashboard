@@ -1,0 +1,66 @@
+/* estructura.css - estilos principales */
+
+/* Reset / fondo negro */
+/* estructura.css - arreglo visibilidad */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff; /* fondo de la página */
+  color: #000;      /* texto por defecto NEGRO para legibilidad en fondo blanco */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+
+/* TÍTULO principal */
+.titu {
+  background: #000; /* fondo negro */
+  color: #ff0000;   /* letras rojas */
+  padding: 18px 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* quitar márgenes superiores */
+}
+
+/* Quitar fondo blanco de contenedores de bootstrap */
+.container, .card {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Si quieres que la tarjeta que contiene la tabla tenga fondo blanco (contraste),
+   puedes quitar la propiedad 'background: transparent' de .card anterior o
+   usar una clase específica (.card-table) para mostrar fondo claro.
+   Aquí dejaremos la tabla con fondo claro para legibilidad. */
+#tabla-kpi { background: #fff; color: #000; }
+
+
+/* Ajustes de la tabla */
+#tabla-kpi th, #tabla-kpi td {
+  vertical-align: middle;
+  padding: 6px 8px;
+  font-size: 14px;
+}
+
+/* Hover en celdas (opcional) */
+#tabla-kpi tbody tr:hover td {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Mantener tus estilos para imágenes y pilares si los necesitas */
+.strategy-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform .3s ease;
+}
+
+/* ... puedes pegar el resto de tus estilos acá ... */
+
+/* Responsive */
+@media (max-width: 576px) {
+  .strategy-img { width:120px; height:120px; }
+}
