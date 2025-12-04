@@ -18,18 +18,18 @@ function slugFromLabel(label) {
 
 export default async function handler(req, res) {
   try {
-    // CORS simple (permite cualquier origen). Si lo publicas, restringe al dominio.
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET");
-    res.setHeader("Content-Type", "application/json");
+    // agregar al inicio del handler, antes de usar process.env y demás
+    // Manejo CORS / Preflight
+    const origin = req.headers.origin || "*";
+    res.setHeader("Access-Control-Allow-Origin", origin === "null" ? "*" : origin);
+    res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    const keyJson = process.env.SERVICE_ACCOUNT_KEY;
-    const spreadsheetId = process.env.SPREADSHEET_ID;
-    const sheetRange = process.env.SHEET_RANGE || "Sheet1!A1:L100"; // ajustar si quieres otro
+    // Responder a preflight OPTIONS rápido
+    if (req.method === "OPTIONS") {
+    return res.status(204).end();
+}
 
-    if (!keyJson || !spreadsheetId) {
-      return res.status(500).json({ error: "CONFIG_MISSING" });
-    }
 
     // parseamos la key (si fue pasada como JSON string)
     const key = typeof keyJson === "string" ? JSON.parse(keyJson) : keyJson;
